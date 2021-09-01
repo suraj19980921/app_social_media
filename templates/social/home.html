@@ -1,9 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <ul>
-        {% for post in posts %}
-           <li>{{post}} - {{post.like_set.count}}likes - {{post.comment_set.count}}comments</li> 
+
+    <div class="container">
+        <h3>Home</h1>
+        <div class="row">
+            <div class="col s12">
+                <form action="/post/" method="post">
+                    {% csrf_token %}
+                    {{post_form}}
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Post</button>
+                </form>
+                
+            </div>
+        </div>
+       
+       {% for post in posts %}
+            <div class="row">
+                <div class="col s12">
+                    {% include 'social/components/wall.html'%}
+                </div>
+            </div>
+    
+               
         {% endfor %}
-    </ul>
+        
+    </div>
+    
 {% endblock %}

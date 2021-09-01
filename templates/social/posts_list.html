@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <ul>
+    <div class="container">
+        <h3>Posts Wall </h3>
         {% for post in posts %}
-           <li>{{post}} - {{post.like_set.count}} likes - {{post.comment_set.count}} comments</li> 
+            <div class="row">
+                 <div class="col-s12">
+                    {% include 'social/components/wall.html' %}
+                 </div>
+            </div>
         {% endfor %}
+    </div>
+    <ul>
+       
     </ul>
 {% endblock %}
