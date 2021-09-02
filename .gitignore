@@ -1,4 +1,5 @@
 env/
 IMG_4012.jpg
-db.sqite3
+db.sqlite3
 media
+staticfiles
