@@ -1,1 +1,1 @@
-web: gunicorn hello_world_deployment.wsgi
+web: gunicorn social_media_app.wsgi
