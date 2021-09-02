@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-image">
       {% if post.image %}
-        {{post.image}}
+        <img src="/media/{{post.image}}" style="height:60%; width:60%;">
       {% endif %}
 
     </div>
@@ -11,7 +11,7 @@
       <p>{{post.content}}</p>
     </div>
     <div class="card-action">
-      <a href="#">{{post.like_set.count}} likes</a>
+      <a href="#" onclick="postLike('{{post.id}}')">{{post.like_set.count}} likes</a>
       <a class="modal-trigger" href="#commentModal{{post.id}}"> {{post.comment_set.count}} comments</a>
     </div>
 </div>
@@ -21,6 +21,21 @@
   <div id="commentModal{{post.id}}" class="modal">
     <div class="modal-content">
       <h4>Comments</h4>
-      <p>A bunch of text</p>
+      <ul>
+       
+          {% for comment in post.comment_set.all %}
+            <li><p>{{ comment.user.first_name}} ->  {{ comment.content}}</p></li>
+          {% endfor %}
+     
+        </ul>
+     
+      <form  onsubmit="postComment({{post.id}}, document.getElementById('comment{{post.id}}').value)">
+        {% csrf_token %}
+        <div class="input-field col s12">
+          <input placeholder="comment" id="comment{{post.id}}" type="text" class="validate">
+          <label for="comment{{post.id}}"></label>
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
